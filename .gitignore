@@ -1,0 +1,8 @@
+venv
+.env
+.idea
+.vscode
+*.json
+*.sqlite3
+**/migrations/*
+!**/migrations/__init__.py
