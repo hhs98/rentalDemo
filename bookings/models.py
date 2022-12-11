@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Booking(models.Model):
-    product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='bookings')
     from_date = models.DateField()
     to_date = models.DateField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
