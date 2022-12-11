@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'products',
+    'bookings',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': config('PAGE_SIZE', default=10, cast=int)

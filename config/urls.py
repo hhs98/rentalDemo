@@ -14,7 +14,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="MIT License"),
     ),
     public=True,
-    permission_classes=[permissions.DjangoModelPermissionsOrAnonReadOnly],
+    permission_classes=[permissions.AllowAny],
 )
 
 urlpatterns = [
@@ -23,4 +23,5 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
     path('api/v1/', include('products.urls')),
+    path('api/v1/', include('bookings.urls')),
 ]
