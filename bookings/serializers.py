@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import Booking
-from products.models import Product
-from datetime import datetime
+from utils.util import Util
+
+util = Util()
 
 
 class BookingSerializer(serializers.ModelSerializer):
@@ -10,20 +11,16 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def validate_price(self, value):
-        if value <= 0:
-            raise serializers.ValidationError('Price must be greater than 0')
-        from_date = datetime.strptime(self.initial_data['from_date'], '%Y-%m-%d')
-        to_date = datetime.strptime(self.initial_data['to_date'], '%Y-%m-%d')
-        product = Product.objects.get(id=self.initial_data['product'])
-        estimated_price = (to_date - from_date).days * product.price
-        if value != estimated_price:
-            raise serializers.ValidationError('Price must be equal to estimated price')
-        return value
+        return util.validate_price(value, self.initial_data['from_date'], self.initial_data['to_date'],
+                                   self.initial_data['product'])
 
     def validate(self, data):
         from_date = data['from_date']
         to_date = data['to_date']
         product = data['product']
+
+        if (to_date - from_date).days > product.minimum_rent_period:
+            raise serializers.ValidationError("Booking period is greater than minimum booking period")
         if from_date >= to_date:
             raise serializers.ValidationError('From date must be before to date')
         if not product.availability:
