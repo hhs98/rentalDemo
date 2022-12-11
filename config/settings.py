@@ -131,3 +131,8 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
