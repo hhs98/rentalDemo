@@ -4,7 +4,14 @@
 
 http://angrywolf.pythonanywhere.com/swagger/
 
-## API Endpoints
+## ADMIN
+http://angrywolf.pythonanywhere.com/admin/
+
+<code>
+username: admin
+password: admin
+</code>
+
 
 ## Live Demo
 
